@@ -20,19 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# Qlik-CLI is a PowerShell module that provides a command line interface for 
-# managing a Qlik Sense environment. The module provides a set of commands for 
-# viewing and editing configuration settings, as well as managing tasks and other 
-# features available through the Qlik Sense Repository APIs.
-# 
-# See https://github.com/ahaydon/Qlik-Cli for more details
-# 
-
 param (
-    [string] $HostName        = $null,
     [string] $AppName         = $null,
-    [string] $RemoveOlderThan = $null,
-    [switch] $SkipConnect     = $false
+    [string] $RemoveOlderThan = $null
 )
 
 # Break if Qlik CLI is not available
@@ -40,23 +30,6 @@ if(!(Get-Module -ListAvailable -Name Qlik-CLI)) {
     Write-Host -ForegroundColor Red "Error: Qlik CLI has not yet been installed. "
     break
 }
-
-# Connect to the Qlik Sense
-if($HostName -and -not $SkipConnect) { 
-    Write-Host "Qlik Sense hostname: $HostName"
-} else {
-    $HostName = Read-Host -Prompt "Qlik Sense hostname" 
-}
-
-if ($WaitForInstall) {
-    Write-Host "Waiting for Qlik CLI to finish installing..."
-    do{
-        Start-Sleep -Seconds 10
-        Import-Module Qlik-CLI -ErrorAction SilentlyContinue
-    } While(!(Get-Module -ListAvailable -Name Qlik-CLI))    
-}
-
-Connect-Qlik $HostName -TrustAllCerts -UseDefaultCredentials | Out-Null
 
 # Set license variable values
 if($AppName)         { Write-Host "Full app name: $AppName"                         } else { $AppName         = Read-Host -Prompt "Full app name"                               }
