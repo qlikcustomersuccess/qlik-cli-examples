@@ -27,7 +27,11 @@
 # viewing and editing configuration settings, as well as managing tasks and other 
 # features available through the Qlik Sense Repository APIs.
 # 
+# This PS1 file installs Qlik CLI based on different options for various versions 
+# of PowerShell, as docuemtned in the Qlik CLI github project.
+
 # See https://github.com/ahaydon/Qlik-Cli for more details
+
 
 $PSVersion = $PSVersionTable.PSVersion.Major
 
