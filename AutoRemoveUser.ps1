@@ -20,6 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+#This ps1 is used to remove multiple users from QMC based on the condition. Useful especially when accidently sync unneccessry large amount of users/attributes into QMC. 
+#Note, This only applies to the newly synchronized users meaning the user has not accessed Qlik Sense and created any app/objects yet. 
+
 #Connect to Qlik Sense server
 
 Connect-Qlik <QLIK SENSE SERVER HOSTNAME OR DNS NAME>
