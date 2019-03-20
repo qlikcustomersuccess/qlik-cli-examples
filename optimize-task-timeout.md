@@ -1,4 +1,4 @@
-# Optimize tasks using Qlik CLI
+# Optimize Task Timeout Using Qlik CLI
 
 Qlik Sense tasks have a default execution timeout of 1440 minutes (24 hours), which might not be optimal for a production environment. This example shows how Qlik CLI can be used to identofy tasks with extensive timeout setting, which can be subject to re-configuraiton. 
 
