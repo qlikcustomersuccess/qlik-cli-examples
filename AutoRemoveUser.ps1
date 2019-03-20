@@ -29,8 +29,8 @@ Connect-Qlik <QLIK SENSE SERVER LOCALHOST OR FQDN>
 
 #Set the filter to fetch the users from QMC.  Firstly verify the filter and user amount to make sure it is correct result. Here 9999-xx-xx xx:xx:xx is the example
 
-(Get-QlikUser -filter "createdDate gt '9999-xx-xx xx:xx:xx' " | measure).count
+(Get-QlikUser -filter "createdDate gt '9999-03-20 10:48:00' " | measure).count
 
 #Remove Qlik Sense User
 
-(Get-QlikUser -filter "createdDate gt '9999-xx-xx xx:xx:xx' " -full).id | ForEach-Object { Remove-QlikUser -id $_ }
+(Get-QlikUser -filter "createdDate gt '9999-03-20 10:48:00' " -full).id | ForEach-Object { Remove-QlikUser -id $_ }
