@@ -5,31 +5,43 @@ Qlik Sense tasks have a default execution timeout of 1440 minutes (24 hours), wh
 ## Find tasks with extensive execution timeout
 
 1. Connect to Qlik Sense Repository Service on central node
-    ```
-    Connect-Qlik qlikserver.domain.local
-    ```
 1. Get list of all tasks <br/>
-    ```
-    Get-QlikReloadTask -full | `
-    ```
-1. Include tasks that can execute multiple times within current ask timeout <br/> This example filters tasks that can execute five (5) times within the timeout period.
-    ```
-    Where-Object { $_.taskSessionTimeout / $([Math]::floor($_.operational.lastexecutionresult.duration/(1000))) -gt 5 } | `
-    ```
+1. Include tasks that can execute multiple times within current ask timeout <br/> This example filters tasks that can execute ten (10) times within the timeout period.
 1. Print task details
-    ```
-    ForEach-Object { "  Start: " + $_.operational.lastexecutionresult.starttime + `
-                    "`tStop: " + $_.operational.lastexecutionresult.stoptime + `
-                    "`tDuration: " + (New-TimeSpan -seconds $([Math]::floor($_.operational.lastexecutionresult.duration/(1000)))) + `
-                    "`tTimeout: " + (New-TimeSpan -minutes $_.taskSessionTimeout) + `
-                    "`tApp: " + $_.app.name }
-    ```
 1. The output shows all the task where latest execution time was significantly than the current task execution timeout. 
+    a. Review the tasks and adjust tiemout to a suitable level. 
+    a. Repeat proces with a lower threshold to adjust tasks with longer execution times. 
+
+Example Powershell script:
+```
+Connect-Qlik qlikserver.domain.local
+
+Get-QlikReloadTask -full | `
+Where-Object { $_.taskSessionTimeout / $([Math]::floor( $_.operational.lastexecutionresult.duration/(1000))) -gt 10 } | `
+ForEach-Object { "  Start: " + $_.operational.lastexecutionresult.starttime + `
+                 "`tStop: " + $_.operational.lastexecutionresult.stoptime + `
+                 "`tDuration: " + (New-TimeSpan -seconds $([Math]::floor($_.operational.lastexecutionresult.duration/(1000)))) + `
+                 "`tTimeout: " + (New-TimeSpan -minutes $_.taskSessionTimeout) + `
+                 "`tApp: " + $_.app.name }
+```
 
 ## Adjust task execution time out
 
 Note, the is not a specifc recommended timeout value. Task timeout must be set based on the task and local execution expectations. If execution time varies for a specific task, then time out should be based on the longest expected execution time, not _only_ the latest execution as show above. 
 
+### Inividual task timeout update
+
+1. Connect to Qlik Sense Repository Service on central node
+    ```
+    Connect-Qlik qlikserver.domain.local
+    ```
+
+### Bulk task timeout update
+
+1. Connect to Qlik Sense Repository Service on central node
+    ```
+    Connect-Qlik qlikserver.domain.local
+    ```
 
 ## References
 
