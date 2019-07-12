@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 # Connect to Qlik Sense
-# Foreamxple with ./connect-cli.ps1
+# For example with ./connect-cli.ps1
 
 Get-QlikApp -filter "published eq True"
 
