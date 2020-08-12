@@ -1,27 +1,31 @@
 <#
     .SYNOPSIS
-    Add users from CSV file to Qlik Sense Enterprise
+    Add users from CSV file to Qlik Sense Enterprise on Windows
     
     .DESCRIPTION
     This example utilizes Qlik CLI for Qlik Sense on Windows to add new users 
     to Qlik Sense user list. The added users are extracted from a CSV file, 
     containing userdomain and username for each user to be added.    
+    
+    This is a simple way to prepopulate Qlik Sense repository with users prior 
+    to their first login. This allows the users to be included in following UDC 
+    sync so that user attributes can be populated before initial user access.
         
-​    .PARAMETER  HostName
+    .PARAMETER  HostName
     Hostname to Qlik Sense central node. This is where Qlik Sense Repository 
     Servcie (QRS) API will be called to add new users to Qlik Sense. 
     Default value is localhost. 
-​
+
     .EXAMPLE
     C:\PS> .\Add-QlikUsersFromCSV.ps1 -PathCSV "c:\users.csv"
     
-    Load users from ​'c:\users.csv' and add to Qlik Sense accessed on localhost. 
+    Load users from 'c:\users.csv' and add to Qlik Sense accessed on localhost. 
 
     .EXAMPLE
     C:\PS> .\Add-QlikUsersFromCSV.ps1 -PathCSV "c:\users.csv" -HostName "qlikserver1.domain.local"
 
-    Load users from ​'c:\users.csv' and add to Qlik Sense on qlikserver1.domain.local. 
-    ​
+    Load users from 'c:\users.csv' and add to Qlik Sense on qlikserver1.domain.local. 
+    
     .NOTES
     Qlik CLI for Qlik Sense on Windows is not supported by Qlik Support. 
     See https://github.com/ahaydon/Qlik-Cli-Windows for more details.
@@ -62,4 +66,3 @@ If(Test-Path -Path "$PathCSV") {
 } else {
     throw "ERROR: Path to CSV file is invalid; $PathCSV "
 }
-
