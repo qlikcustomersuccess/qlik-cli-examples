@@ -59,7 +59,7 @@ if($PSVersion -lt 4) {
     New-Item "$Env:Programfiles\WindowsPowerShell\Modules\Qlik-Cli" -ItemType directory -Force
 
     Copy-Item -Path "$downloads_folder\Qlik-Cli.psd1" -Destination "$module_folder\Qlik-Cli.psd1"
-    Copy-Item -Path "$downloads_folder\Qlik-Cli.psd1" -Destination "$module_folder\Qlik-Cli.psd1"
+    Copy-Item -Path "$downloads_folder\Qlik-Cli.psm1" -Destination "$module_folder\Qlik-Cli.psm1"
 
 }else {
 
