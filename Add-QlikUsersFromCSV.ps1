@@ -35,7 +35,7 @@
 
 param (
     [Parameter(Mandatory=$true)]
-    [string] $HostName = "localhost",
+    [string] $HostName,
     [Parameter(Mandatory=$true)]
     [String] $PathCSV
 )
@@ -45,7 +45,7 @@ if(!(Get-Module -ListAvailable -Name Qlik-CLI)) {
 }
 
 try {
-    Connect-Qlik $HostName -TrustAllCerts -UseDefaultCredentials | Out-Null
+    Connect-Qlik $HostName -TrustAllCerts  | Out-Null
 } catch {
     throw "ERROR: Failed to connect to $HostName. Check hostname spelling and confirm that certificates are availabel for the user. "
 }
@@ -56,8 +56,8 @@ If(Test-Path -Path "$PathCSV") {
 
     if($headers[0] -like "domain" -and $headers[1] -like "userid" -and $headers.Length -eq 2) {
 
-        Import-csv -path "$PathCSV" -Header 'Domain', 'UserId' | `
-        ForEach-Object { New-QlikUser  -userId "$($_.$UserId)" -userDirectory "$($_.$Domain)" }
+        import-csv -path "$PathCSV" -Delimiter "," -Header 'Domain', 'UserId' | select-object -Skip 1 | `
+        ForEach-Object { New-QlikUser  -userId "$($_.UserId)" -userDirectory "$($_.Domain)" }
     
     } else {
         throw "ERROR: CSV file does not have expected format of TWO columns named DOMAIN and USERID. "
