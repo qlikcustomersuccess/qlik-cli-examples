@@ -16,6 +16,14 @@
     Servcie (QRS) API will be called to add new users to Qlik Sense. 
     Default value is localhost. 
 
+    .PARAMETER  PathCSV
+    Path of csv file containg two columns, Domain and UserId. Example as below:
+
+     Domain,UserId
+     Domain,User1
+     QlikServer1,User2
+    
+    
     .EXAMPLE
     C:\PS> .\Add-QlikUsersFromCSV.ps1 -PathCSV "c:\users.csv"
     
@@ -34,8 +42,8 @@
 #>
 
 param (
-    [Parameter(Mandatory=$true)]
-    [string] $HostName,
+    [Parameter(Mandatory=$false)]
+    [string] $HostName="localhost",
     [Parameter(Mandatory=$true)]
     [String] $PathCSV
 )
