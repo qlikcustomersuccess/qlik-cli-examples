@@ -20,16 +20,16 @@
     Path of csv file containg two columns, Domain and UserId. Example as below:
 
      Domain,UserId
-     Domain,User1
-     QlikServer1,User2
+     MYCORP,User1
+     MYCORP,User2
     
     
-    .EXAMPLE
+    .EXAMPLE 
     C:\PS> .\Add-QlikUsersFromCSV.ps1 -PathCSV "c:\users.csv"
     
     Load users from 'c:\users.csv' and add to Qlik Sense accessed on localhost. 
 
-    .EXAMPLE
+    .EXAMPLE 
     C:\PS> .\Add-QlikUsersFromCSV.ps1 -PathCSV "c:\users.csv" -HostName "qlikserver1.domain.local"
 
     Load users from 'c:\users.csv' and add to Qlik Sense on qlikserver1.domain.local. 
